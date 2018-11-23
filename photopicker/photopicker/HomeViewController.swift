@@ -62,6 +62,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         sv.spacing = 16.0
         sv.axis = .vertical
         sv.alignment = .center
+        sv.distribution = .equalSpacing
         return sv
     }()
     
@@ -77,7 +78,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         
         selectedImage.fillSuperview()
         selectImageButton.anchor(nil, left: self.view.safeAreaLayoutGuide.leftAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: self.view.safeAreaLayoutGuide.rightAnchor, topConstant: 0, leftConstant: 22, bottomConstant: 22, rightConstant: 22, widthConstant: 0, heightConstant: 44)
-        stackView.anchor(self.view.safeAreaLayoutGuide.topAnchor, left: self.view.safeAreaLayoutGuide.leftAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: nil, topConstant: 22, leftConstant: 22, bottomConstant: 0, rightConstant: 0, widthConstant: 66, heightConstant: 0)
+        stackView.anchor(self.view.safeAreaLayoutGuide.topAnchor, left: self.view.safeAreaLayoutGuide.leftAnchor, bottom: nil, right: nil, topConstant: 22, leftConstant: 22, bottomConstant: 0, rightConstant: 0, widthConstant: 66, heightConstant: 0)
         
         stackView.addArrangedSubview(colorOne)
         stackView.addArrangedSubview(colorTwo)
