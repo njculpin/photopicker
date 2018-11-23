@@ -29,32 +29,40 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     var imagePicker = UIImagePickerController()
     
-    lazy var colorOne: UIView = {
-        let image = UIView()
-        image.heightAnchor.constraint(equalToConstant: 66).isActive = true
-        image.widthAnchor.constraint(equalToConstant: 66).isActive = true
-        return image
+    lazy var colorOne: UIButton = {
+        let button = UIButton()
+        button.heightAnchor.constraint(equalToConstant: 66).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 66).isActive = true
+        button.addTarget(self, action: #selector(oneColorPressed), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
 
-    lazy var colorTwo: UIView = {
-        let image = UIView()
-        image.heightAnchor.constraint(equalToConstant: 66).isActive = true
-        image.widthAnchor.constraint(equalToConstant: 66).isActive = true
-        return image
+    lazy var colorTwo: UIButton = {
+        let button = UIButton()
+        button.heightAnchor.constraint(equalToConstant: 66).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 66).isActive = true
+        button.addTarget(self, action: #selector(twoColorPressed), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
-    lazy var colorThree: UIView = {
-        let image = UIView()
-        image.heightAnchor.constraint(equalToConstant: 66).isActive = true
-        image.widthAnchor.constraint(equalToConstant: 66).isActive = true
-        return image
+    lazy var colorThree: UIButton = {
+        let button = UIButton()
+        button.heightAnchor.constraint(equalToConstant: 66).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 66).isActive = true
+        button.addTarget(self, action: #selector(threeColorPressed), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
-    lazy var colorFour: UIView = {
-        let image = UIView()
-        image.heightAnchor.constraint(equalToConstant: 66).isActive = true
-        image.widthAnchor.constraint(equalToConstant: 66).isActive = true
-        return image
+    lazy var colorFour: UIButton = {
+        let button = UIButton()
+        button.heightAnchor.constraint(equalToConstant: 66).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 66).isActive = true
+        button.addTarget(self, action: #selector(fourColorPressed), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     lazy var stackView: UIStackView = {
@@ -128,5 +136,45 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         let outputImage = filter.outputImage!
         return UIImage(ciImage: outputImage)
     }
+    
+    
+    @objc func oneColorPressed(){
+        let color = colorOne.backgroundColor?.hexString()
+        alertView(color: color!)
+    }
+    
+    @objc func twoColorPressed(){
+        let color = colorTwo.backgroundColor?.hexString()
+        alertView(color: color!)
+    }
+    
+    @objc func threeColorPressed(){
+        let color = colorThree.backgroundColor?.hexString()
+        alertView(color: color!)
+    }
+    
+    @objc func fourColorPressed(){
+        let color = colorFour.backgroundColor?.hexString()
+        alertView(color: color!)
+    }
+    
+    func alertView(color:String){
+        let alert = UIAlertController(title: "Color Picked", message: color, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+                
+                
+            }}))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     
 }
