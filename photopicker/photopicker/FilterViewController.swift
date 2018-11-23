@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  FilterViewController.swift
 //  photopicker
 //
 //  Created by Nicholas Culpin on 11/23/18.
@@ -9,7 +9,9 @@
 import UIKit
 import Photos
 
-class HomeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class FilterViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    public var instagramImage: String?
     
     lazy var selectedImage: UIImageView = {
         let si = UIImageView()
@@ -23,6 +25,14 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         let sb = UIButton()
         sb.setTitle("Pick", for: .normal)
         sb.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+        sb.translatesAutoresizingMaskIntoConstraints = false
+        return sb
+    }()
+    
+    lazy var otherSourceButton: UIButton = {
+        let sb = UIButton()
+        sb.setTitle("Other", for: .normal)
+        sb.addTarget(self, action: #selector(pickOtherImage), for: .touchUpInside)
         sb.translatesAutoresizingMaskIntoConstraints = false
         return sb
     }()
@@ -77,21 +87,32 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
+        
     }
     
     func setUpViews(){
         self.view.addSubview(selectedImage)
-        self.view.addSubview(selectImageButton)
         self.view.addSubview(stackView)
         
         selectedImage.fillSuperview()
-        selectImageButton.anchor(nil, left: self.view.safeAreaLayoutGuide.leftAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: self.view.safeAreaLayoutGuide.rightAnchor, topConstant: 0, leftConstant: 22, bottomConstant: 22, rightConstant: 22, widthConstant: 0, heightConstant: 44)
         stackView.anchor(self.view.safeAreaLayoutGuide.topAnchor, left: self.view.safeAreaLayoutGuide.leftAnchor, bottom: nil, right: nil, topConstant: 22, leftConstant: 22, bottomConstant: 0, rightConstant: 0, widthConstant: 66, heightConstant: 0)
         
         stackView.addArrangedSubview(colorOne)
         stackView.addArrangedSubview(colorTwo)
         stackView.addArrangedSubview(colorThree)
         stackView.addArrangedSubview(colorFour)
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: selectImageButton)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: otherSourceButton)
+        self.title = "Photo Filter"
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("test \(String(describing: instagramImage))")
+        if instagramImage != nil {
+          selectedImage.dowloadFromServer(link: instagramImage!)
+        }
     }
     
     @objc func pickImage(){
@@ -101,6 +122,11 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
+    }
+    
+    @objc func pickOtherImage(){
+        let insta = InstagramPhotosViewController()
+        self.present(insta, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -115,16 +141,21 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         }
         
         dismiss(animated: true) {
-            self.selectedImage.image = newImage
-            let filteredImage = self.filterImage(input: newImage)
-            filteredImage.getColors(quality: .high) { colors in
-                UIView.animate(withDuration: 0.15, animations: {
-                    self.colorOne.backgroundColor = colors.primary
-                    self.colorTwo.backgroundColor = colors.secondary
-                    self.colorThree.backgroundColor = colors.detail
-                    self.colorFour.backgroundColor = colors.background
-                })
-            }
+            self.getColors(image:newImage)
+        }
+    }
+    
+    
+    func getColors(image:UIImage){
+        self.selectedImage.image = image
+        let filteredImage = self.filterImage(input: image)
+        filteredImage.getColors(quality: .high) { colors in
+            UIView.animate(withDuration: 0.15, animations: {
+                self.colorOne.backgroundColor = colors.primary
+                self.colorTwo.backgroundColor = colors.secondary
+                self.colorThree.backgroundColor = colors.detail
+                self.colorFour.backgroundColor = colors.background
+            })
         }
     }
     

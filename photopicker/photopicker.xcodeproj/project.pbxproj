@@ -13,12 +13,13 @@
 		504B528E21A86E4E00217499 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504B528C21A86E4E00217499 /* LaunchScreen.storyboard */; };
 		504B529921A86E4F00217499 /* photopickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B529821A86E4E00217499 /* photopickerTests.swift */; };
 		504B52A421A86E4F00217499 /* photopickerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B52A321A86E4F00217499 /* photopickerUITests.swift */; };
-		504B52B221A86FA600217499 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B52B121A86FA600217499 /* HomeViewController.swift */; };
+		504B52B221A86FA600217499 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B52B121A86FA600217499 /* FilterViewController.swift */; };
 		504B52B421A8706B00217499 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B52B321A8706B00217499 /* Constraints.swift */; };
 		504B52B821A8842A00217499 /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B52B721A8842A00217499 /* UIImageColors.swift */; };
 		504B52BE21A88D2800217499 /* ColorToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B52BD21A88D2800217499 /* ColorToString.swift */; };
 		504B52C021A8924800217499 /* InstagramPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B52BF21A8924800217499 /* InstagramPhotosViewController.swift */; };
 		504B52C221A8929700217499 /* InstagramPhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B52C121A8929700217499 /* InstagramPhotosCollectionViewCell.swift */; };
+		504B52C421A8A57600217499 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B52C321A8A57600217499 /* Download.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,12 +52,13 @@
 		504B529F21A86E4F00217499 /* photopickerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photopickerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		504B52A321A86E4F00217499 /* photopickerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photopickerUITests.swift; sourceTree = "<group>"; };
 		504B52A521A86E4F00217499 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		504B52B121A86FA600217499 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		504B52B121A86FA600217499 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		504B52B321A8706B00217499 /* Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 		504B52B721A8842A00217499 /* UIImageColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageColors.swift; sourceTree = "<group>"; };
 		504B52BD21A88D2800217499 /* ColorToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorToString.swift; sourceTree = "<group>"; };
 		504B52BF21A8924800217499 /* InstagramPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramPhotosViewController.swift; sourceTree = "<group>"; };
 		504B52C121A8929700217499 /* InstagramPhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramPhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		504B52C321A8A57600217499 /* Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,9 +110,10 @@
 			isa = PBXGroup;
 			children = (
 				504B528021A86E4C00217499 /* AppDelegate.swift */,
-				504B52B121A86FA600217499 /* HomeViewController.swift */,
+				504B52B121A86FA600217499 /* FilterViewController.swift */,
 				504B52BF21A8924800217499 /* InstagramPhotosViewController.swift */,
 				504B52C121A8929700217499 /* InstagramPhotosCollectionViewCell.swift */,
+				504B52C321A8A57600217499 /* Download.swift */,
 				504B52B921A8845800217499 /* ThirdParty */,
 				504B52B321A8706B00217499 /* Constraints.swift */,
 				504B528A21A86E4E00217499 /* Assets.xcassets */,
@@ -278,13 +281,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				504B52C421A8A57600217499 /* Download.swift in Sources */,
 				504B52B421A8706B00217499 /* Constraints.swift in Sources */,
 				504B52B821A8842A00217499 /* UIImageColors.swift in Sources */,
 				504B528921A86E4C00217499 /* photopicker.xcdatamodeld in Sources */,
 				504B52C021A8924800217499 /* InstagramPhotosViewController.swift in Sources */,
 				504B52C221A8929700217499 /* InstagramPhotosCollectionViewCell.swift in Sources */,
 				504B528121A86E4C00217499 /* AppDelegate.swift in Sources */,
-				504B52B221A86FA600217499 /* HomeViewController.swift in Sources */,
+				504B52B221A86FA600217499 /* FilterViewController.swift in Sources */,
 				504B52BE21A88D2800217499 /* ColorToString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
