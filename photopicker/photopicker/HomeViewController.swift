@@ -28,7 +28,43 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     }()
     
     var imagePicker = UIImagePickerController()
+    
+    lazy var colorOne: UIView = {
+        let image = UIView()
+        image.heightAnchor.constraint(equalToConstant: 66).isActive = true
+        image.widthAnchor.constraint(equalToConstant: 66).isActive = true
+        return image
+    }()
 
+    lazy var colorTwo: UIView = {
+        let image = UIView()
+        image.heightAnchor.constraint(equalToConstant: 66).isActive = true
+        image.widthAnchor.constraint(equalToConstant: 66).isActive = true
+        return image
+    }()
+    
+    lazy var colorThree: UIView = {
+        let image = UIView()
+        image.heightAnchor.constraint(equalToConstant: 66).isActive = true
+        image.widthAnchor.constraint(equalToConstant: 66).isActive = true
+        return image
+    }()
+    
+    lazy var colorFour: UIView = {
+        let image = UIView()
+        image.heightAnchor.constraint(equalToConstant: 66).isActive = true
+        image.widthAnchor.constraint(equalToConstant: 66).isActive = true
+        return image
+    }()
+    
+    lazy var stackView: UIStackView = {
+        let sv = UIStackView()
+        sv.spacing = 16.0
+        sv.axis = .vertical
+        sv.alignment = .center
+        return sv
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
@@ -37,9 +73,16 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     func setUpViews(){
         self.view.addSubview(selectedImage)
         self.view.addSubview(selectImageButton)
+        self.view.addSubview(stackView)
         
         selectedImage.fillSuperview()
         selectImageButton.anchor(nil, left: self.view.safeAreaLayoutGuide.leftAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: self.view.safeAreaLayoutGuide.rightAnchor, topConstant: 0, leftConstant: 22, bottomConstant: 22, rightConstant: 22, widthConstant: 0, heightConstant: 44)
+        stackView.anchor(self.view.safeAreaLayoutGuide.topAnchor, left: self.view.safeAreaLayoutGuide.leftAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: nil, topConstant: 22, leftConstant: 22, bottomConstant: 0, rightConstant: 0, widthConstant: 66, heightConstant: 0)
+        
+        stackView.addArrangedSubview(colorOne)
+        stackView.addArrangedSubview(colorTwo)
+        stackView.addArrangedSubview(colorThree)
+        stackView.addArrangedSubview(colorFour)
     }
     
     @objc func pickImage(){
@@ -64,6 +107,14 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         
         dismiss(animated: true) {
             self.selectedImage.image = self.filterImage(input: newImage)
+            newImage.getColors(quality: .high) { colors in
+                UIView.animate(withDuration: 0.15, animations: {
+                    self.colorOne.backgroundColor = colors.primary
+                    self.colorTwo.backgroundColor = colors.secondary
+                    self.colorThree.backgroundColor = colors.detail
+                    self.colorFour.backgroundColor = colors.background
+                })
+            }
         }
     }
     
@@ -71,7 +122,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         let inputCIImage = CIImage(image: input)!
         let filter = CIFilter(name: "CICrystallize")!
         filter.setValue(inputCIImage, forKey: kCIInputImageKey)
-        filter.setValue(400, forKey: kCIInputRadiusKey)
+        filter.setValue(100, forKey: kCIInputRadiusKey)
         let outputImage = filter.outputImage!
         return UIImage(ciImage: outputImage)
     }
