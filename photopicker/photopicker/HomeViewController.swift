@@ -106,8 +106,9 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         }
         
         dismiss(animated: true) {
-            self.selectedImage.image = self.filterImage(input: newImage)
-            newImage.getColors(quality: .high) { colors in
+            self.selectedImage.image = newImage
+            let filteredImage = self.filterImage(input: newImage)
+            filteredImage.getColors(quality: .high) { colors in
                 UIView.animate(withDuration: 0.15, animations: {
                     self.colorOne.backgroundColor = colors.primary
                     self.colorTwo.backgroundColor = colors.secondary
