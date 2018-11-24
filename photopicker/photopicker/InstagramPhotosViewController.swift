@@ -33,13 +33,14 @@ class InstagramPhotosViewController: UIViewController, UICollectionViewDataSourc
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
         setupViews()
     }
     
 
     func setupViews(){
         self.view.addSubview(imagesCollectionView)
-        imagesCollectionView.fillSuperview()
+        imagesCollectionView.anchor(self.view.safeAreaLayoutGuide.topAnchor, left: self.view.safeAreaLayoutGuide.leftAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: self.view.safeAreaLayoutGuide.rightAnchor, topConstant: 22, leftConstant: 22, bottomConstant: 22, rightConstant: 22, widthConstant: 0, heightConstant: 0)
         imagesCollectionView.reloadData()
         imagesCollectionView.allowsMultipleSelection = false
         imagesCollectionView.dataSource = self
@@ -59,10 +60,21 @@ class InstagramPhotosViewController: UIViewController, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let image = images[indexPath.row]
-        let filterView = FilterViewController()
-        filterView.instagramImage = image
-        self.dismiss(animated: true, completion: nil)
+        let imageURL = images[indexPath.row]
+        
+        if let url = URL( string:imageURL) {
+            DispatchQueue.global().async {
+                if let data = try? Data( contentsOf:url) {
+                    DispatchQueue.main.async {
+                        let image = UIImage( data:data)
+                        let imageDataDict:[String: UIImage] = ["image": image!]
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "sendImage"), object: nil, userInfo: imageDataDict)
+                    }
+                }
+            }
+        }
+        
+        navigationController?.popViewController(animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -79,3 +91,4 @@ class InstagramPhotosViewController: UIViewController, UICollectionViewDataSourc
     }
     
 }
+

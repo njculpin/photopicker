@@ -9,9 +9,10 @@
 import UIKit
 import Photos
 
+
 class FilterViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    public var instagramImage: String?
+    var image = String()
     
     lazy var selectedImage: UIImageView = {
         let si = UIImageView()
@@ -24,6 +25,7 @@ class FilterViewController: UIViewController, UINavigationControllerDelegate, UI
     lazy var selectImageButton: UIButton = {
         let sb = UIButton()
         sb.setTitle("Pick", for: .normal)
+        sb.setTitleColor(.black, for: .normal)
         sb.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
         sb.translatesAutoresizingMaskIntoConstraints = false
         return sb
@@ -32,12 +34,13 @@ class FilterViewController: UIViewController, UINavigationControllerDelegate, UI
     lazy var otherSourceButton: UIButton = {
         let sb = UIButton()
         sb.setTitle("Other", for: .normal)
+        sb.setTitleColor(.black, for: .normal)
         sb.addTarget(self, action: #selector(pickOtherImage), for: .touchUpInside)
         sb.translatesAutoresizingMaskIntoConstraints = false
         return sb
     }()
     
-    var imagePicker = UIImagePickerController()
+    var imagePicker = UIImagePickerController() // controller to get image from camera roll
     
     lazy var colorOne: UIButton = {
         let button = UIButton()
@@ -86,11 +89,14 @@ class FilterViewController: UIViewController, UINavigationControllerDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.getImage), name: NSNotification.Name(rawValue: "sendImage"), object: nil)
         setUpViews()
         
     }
     
     func setUpViews(){
+        self.view.backgroundColor = .white
+        
         self.view.addSubview(selectedImage)
         self.view.addSubview(stackView)
         
@@ -108,13 +114,6 @@ class FilterViewController: UIViewController, UINavigationControllerDelegate, UI
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        print("test \(String(describing: instagramImage))")
-        if instagramImage != nil {
-          selectedImage.dowloadFromServer(link: instagramImage!)
-        }
-    }
-    
     @objc func pickImage(){
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
             imagePicker.delegate = self
@@ -124,11 +123,18 @@ class FilterViewController: UIViewController, UINavigationControllerDelegate, UI
         }
     }
     
-    @objc func pickOtherImage(){
-        let insta = InstagramPhotosViewController()
-        self.present(insta, animated: true, completion: nil)
+    @objc func getImage(_ notification: NSNotification){
+        if let image = notification.userInfo?["image"] as? UIImage {
+            getColors(image: image)
+        }
     }
     
+    @objc func pickOtherImage(){
+        let insta = InstagramPhotosViewController()
+        self.navigationController?.pushViewController(insta, animated: true)
+    }
+    
+    // Pick from Camera Roll
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         var newImage: UIImage
         
@@ -141,11 +147,12 @@ class FilterViewController: UIViewController, UINavigationControllerDelegate, UI
         }
         
         dismiss(animated: true) {
+            // get colors for the image after camera roll picker is dimissed
             self.getColors(image:newImage)
         }
     }
     
-    
+    // filter the image to pixelate, then get the most common colors
     func getColors(image:UIImage){
         self.selectedImage.image = image
         let filteredImage = self.filterImage(input: image)

@@ -114,8 +114,9 @@
 				504B52BF21A8924800217499 /* InstagramPhotosViewController.swift */,
 				504B52C121A8929700217499 /* InstagramPhotosCollectionViewCell.swift */,
 				504B52C321A8A57600217499 /* Download.swift */,
-				504B52B921A8845800217499 /* ThirdParty */,
 				504B52B321A8706B00217499 /* Constraints.swift */,
+				504B52B721A8842A00217499 /* UIImageColors.swift */,
+				504B52BD21A88D2800217499 /* ColorToString.swift */,
 				504B528A21A86E4E00217499 /* Assets.xcassets */,
 				504B528C21A86E4E00217499 /* LaunchScreen.storyboard */,
 				504B528F21A86E4E00217499 /* Info.plist */,
@@ -140,15 +141,6 @@
 				504B52A521A86E4F00217499 /* Info.plist */,
 			);
 			path = photopickerUITests;
-			sourceTree = "<group>";
-		};
-		504B52B921A8845800217499 /* ThirdParty */ = {
-			isa = PBXGroup;
-			children = (
-				504B52B721A8842A00217499 /* UIImageColors.swift */,
-				504B52BD21A88D2800217499 /* ColorToString.swift */,
-			);
-			path = ThirdParty;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
