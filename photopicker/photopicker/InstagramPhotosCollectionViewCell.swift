@@ -13,8 +13,8 @@ class InstagramPhotosCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .red
+        imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = .white
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

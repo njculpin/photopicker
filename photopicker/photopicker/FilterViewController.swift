@@ -157,7 +157,7 @@ class FilterViewController: UIViewController, UINavigationControllerDelegate, UI
         self.selectedImage.image = image
         let filteredImage = self.filterImage(input: image)
         filteredImage.getColors(quality: .high) { colors in
-            UIView.animate(withDuration: 0.15, animations: {
+            UIView.animate(withDuration: 0.2, animations: {
                 self.colorOne.backgroundColor = colors.primary
                 self.colorTwo.backgroundColor = colors.secondary
                 self.colorThree.backgroundColor = colors.detail
@@ -170,7 +170,7 @@ class FilterViewController: UIViewController, UINavigationControllerDelegate, UI
         let inputCIImage = CIImage(image: input)!
         let filter = CIFilter(name: "CICrystallize")!
         filter.setValue(inputCIImage, forKey: kCIInputImageKey)
-        filter.setValue(100, forKey: kCIInputRadiusKey)
+        filter.setValue(10, forKey: kCIInputRadiusKey)
         let outputImage = filter.outputImage!
         return UIImage(ciImage: outputImage)
     }

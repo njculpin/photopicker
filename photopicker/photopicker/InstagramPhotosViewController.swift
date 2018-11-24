@@ -12,9 +12,9 @@ class InstagramPhotosViewController: UIViewController, UICollectionViewDataSourc
     
     var images = [
         "https://media-cdn.tripadvisor.com/media/photo-m/1280/01/70/71/51/the-painted-ladies-of.jpg",
-        "https://media-cdn.tripadvisor.com/media/photo-m/1280/01/70/71/51/the-painted-ladies-of.jpg",
-        "https://media-cdn.tripadvisor.com/media/photo-m/1280/01/70/71/51/the-painted-ladies-of.jpg",
-        "https://media-cdn.tripadvisor.com/media/photo-m/1280/01/70/71/51/the-painted-ladies-of.jpg",
+        "https://peiwc-test1445460803.netdna-ssl.com/wp-content/uploads/2016/02/san-francisco-is-americas-snobbiest-city-according-to-the-rest-of-the-country.jpg",
+        "http://www.aljazeera.com/mritems/Images/2018/2/13/b9a83cabd7134bbc8ba42bc762ff179f_18.jpg",
+        "https://i.kinja-img.com/gawker-media/image/upload/s--KaMJV6aB--/c_scale,f_auto,fl_progressive,q_80,w_800/czlw7rrrrhbqdnhamzfl.jpg",
         ]
     
     var cellId = "listCell"
